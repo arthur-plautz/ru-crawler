@@ -48,3 +48,16 @@ Then run with:
 ```
 make run_crawler
 ```
+
+## Setup Airflow
+
+To setup airflow you can run:
+```
+make run_airflow
+```
+And to stop:
+```
+make stop_airflow
+```
+
+Access [here](http://localhost:8089)
