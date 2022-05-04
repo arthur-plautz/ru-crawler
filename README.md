@@ -22,6 +22,8 @@ Create your `.env` file based on `.env.example`, then source it.
 source .env
 ```
 
+### With Python
+
 Then you can run via Python like this:
 ```bash
 python -m src.scripts.make_reservation $meal $enablescreenshot
@@ -29,3 +31,20 @@ python -m src.scripts.make_reservation $meal $enablescreenshot
 Script takes two parameters:
 1. The Meal (`Almoço` or `Jantar`)
 2. The Screenshot Flag, that you can set to anything, if you want a image of the status report.
+
+### With Docker
+
+To build image (*just if the image doesn't exist yet*)
+```
+make build_image
+```
+
+Set the `$MEAL` variable:
+```
+export MEAL=targetmeal
+```
+
+Then run with:
+```
+make run_crawler
+```
