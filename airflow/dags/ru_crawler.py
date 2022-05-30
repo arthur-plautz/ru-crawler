@@ -10,7 +10,7 @@ USERS = Variable.get("users")
 default_args = {
     'owner'      : 'airflow',
     'description': 'Make RU Meal Reservation',
-    'start_date' : datetime(2022, 5, 29),
+    'start_date' : datetime(2022, 29, 5),
     'retries'    : 1
 }
 
