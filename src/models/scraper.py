@@ -1,5 +1,6 @@
 import logging
 import os
+from time import sleep
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -53,11 +54,26 @@ class Scraper:
         self.__click_link('Agendar refeição')
         self.__log('.')
 
-        select_element = self.browser.find_element(By.ID,'agendamentoForm:refeicao')
-        select_object = Select(select_element)
+        select_meal_element = self.browser.find_element_by_name('agendamentoForm:refeicao')
+        select_meal_object = Select(select_meal_element)
+        select_meal_object.select_by_visible_text(self.__target_meal)
+
+        sleep(1)
         self.__log('..')
-        select_object.select_by_visible_text(self.__target_meal)
+
+        select_date_element = self.browser.find_element_by_name("agendamentoForm:dtRefeicao")
+        select_date_object = Select(select_date_element)
+        select_date_object.select_by_index(1)
+
+        sleep(1)
         self.__log('...')
+
+        select_hour_element = self.browser.find_element_by_name("agendamentoForm:hrRefeicao")
+        select_hour_object = Select(select_hour_element)
+        select_hour_object.select_by_index(2)
+
+        sleep(1)
+        self.__log('....')
 
         self.__click_btn('agendamentoForm:j_idt93')
         self.__log('Succeeded!')

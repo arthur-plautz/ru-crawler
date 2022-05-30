@@ -10,3 +10,6 @@ run_airflow:
 
 stop_airflow:
 	cd airflow && docker-compose down
+
+update_credentials:
+	docker exec airflow-webserver-ru-crawler airflow variables set 'users' ${CREDENTIALS}

@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 Create your `.env` file based on `.env.example`, then source it.
 ```bash
-source .env
+source config.sh
 ```
 
 ### With Python
