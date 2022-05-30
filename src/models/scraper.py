@@ -64,6 +64,19 @@ class Scraper:
         else:
             raise Exception("(Hour Selection) No option found.")
 
+    def __select_date(self, select_object):
+        target_date = 2
+        while target_date > 0:
+            try:
+                select_object.select_by_index(target_date)
+                self.__log(f'(Date Selection) Option number {target_date} selected.')
+                return True
+            except:
+                self.__log(f'(Date Selection) Option number {target_date} not found, changing parameters...')
+                target_date -= 1
+        else:
+            raise Exception("(Date Selection) No option found.")
+
     def reserve(self):
         self.set_log_prefix('[ RESERVATION ]')
 
@@ -80,7 +93,7 @@ class Scraper:
 
         select_date_element = self.browser.find_element_by_name("agendamentoForm:dtRefeicao")
         select_date_object = Select(select_date_element)
-        select_date_object.select_by_index(1)
+        self.__select_date(select_date_object)
 
         sleep(1)
         self.__log('...')
