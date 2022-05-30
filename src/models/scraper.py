@@ -47,13 +47,22 @@ class Scraper:
     def __click_link(self, text):
         self.browser.find_element(By.LINK_TEXT, text).send_keys("webdriver" + Keys.ENTER)
 
-    @property
-    def __select_hour(self):
+    def __select_hour(self, select_object):
         best_hour = {
             'Almoço': 4,
             'Jantar': 3
         }
-        return best_hour[self.__target_meal]
+        target_hour = best_hour[self.__target_meal]
+        while target_hour > 0:
+            try:
+                select_object.select_by_index(target_hour)
+                self.__log(f'(Hour Selection) Option number {target_hour} selected.')
+                return True
+            except:
+                self.__log(f'(Hour Selection) Option number {target_hour} not found, changing parameters...')
+                target_hour -= 1
+        else:
+            raise Exception("(Hour Selection) No option found.")
 
     def reserve(self):
         self.set_log_prefix('[ RESERVATION ]')
@@ -78,7 +87,7 @@ class Scraper:
 
         select_hour_element = self.browser.find_element_by_name("agendamentoForm:hrRefeicao")
         select_hour_object = Select(select_hour_element)
-        select_hour_object.select_by_index(self.__select_hour)
+        self.__select_hour(select_hour_object)
 
         sleep(1)
         self.__log('....')
