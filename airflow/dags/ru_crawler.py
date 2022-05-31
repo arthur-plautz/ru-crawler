@@ -40,7 +40,7 @@ def build_reservation_task(target_meal, email, name, password):
 with DAG(
     'ru_meal_reservation',
     default_args=default_args,
-    schedule_interval="0 6 * * *",
+    schedule_interval="0 16 * * *",
     catchup=True
 ) as dag:
 
